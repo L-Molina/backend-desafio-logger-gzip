@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/style.css" rel="stylesheet">
+        <script src="/socket.io/socket.io.js"></script>
+		<script src="/main.js"></script>
+        <title>Desafio 16: Loggers, gzip y análisis de performance</title>
+    </head>
+    <body>
+        <main>
+            <% if (user) { %>
+				<div class="logContainer">
+					<div class="userContainer">
+						<p class="userP">Bienvenido <%= user.toUpperCase() %></p>
+						<a href="/logout">CERRAR SESION</a>                                   
+					</div>
+				</div>
+			<% } %>
+			<% if (!user) { %>
+				<div class="logContainer">
+					<p class="userContainer"></p>
+						<p class="userP">No estas logueado</p>
+						<a href="/login">INICIAR SESION</a> 
+					</div>                                  
+				</div>
+			<% } %>
+            <div class="formulario">				
+				<form class="form" action="/productos" method="POST">
+					<legend>AGREGAR PRODUCTO</legend>                    
+					<div class="form-group">
+						<label for="name">NOMBRE</label>
+						<input type="text" class="form-control" name="title" id="name" placeholder="Nombre de Producto" required>
+					</div>
+					<div class="form-group">
+						<label for="precio">PRECIO</label>
+						<input type="text" class="form-control" name="price" id="precio" placeholder="Precio del Producto" required>
+					</div>
+					<div class="form-group">
+						<label for="thumbnail">IMAGEN</label>
+						<input type="thumbnail" class="form-control" name="thumbnail" id="thumbnail" placeholder="url de la Imagen" required>                        
+					</div>             
+					<div class="form-button">
+						<input type="submit" value="ENVIAR →" class="p-1">             
+					</div> 
+				</form>
+			</div>
+            <div class="listadoProductos">
+                <h2 class="listTitle">LISTA DE PRODUCTOS</h2>
+                <table id="productos">				
+                    <%- include('partials/list.ejs'); %>
+                </table>
+            </div>
+            <div class="messageContainer" id="messageContainer">
+				<%- include('partials/messageCenter.ejs'); %>
+			</div>
+            <div class="anchor">
+				<a href="/productos">IR A PRODUCTOS</a>                                   
+			</div>
+        </main>
+    </body>
+</html>
